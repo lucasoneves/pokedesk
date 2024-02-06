@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f1f4f5;
+  font-size: 14px;
+  font-family: 'Mulish', sans-serif;
+}
+
+.container {
+  max-width: 858px;
+  margin: 20px auto;
+  padding: 0 15px;
+}
