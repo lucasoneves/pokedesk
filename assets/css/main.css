@@ -13,3 +13,8 @@ body {
   margin: 20px auto;
   padding: 0 15px;
 }
+
+.container-md {
+  max-width: 541px;
+  padding: 0 15px;
+}

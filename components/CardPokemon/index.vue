@@ -1,15 +1,28 @@
 <template>
-  <div class="bg-white drop-shadow-xs rounded-md p-4 max-h-48 flex flex-col items-center">
-    <img src="~/assets/images/bulbasaur.svg" alt="Bulbasaur" class="mb-3" />
-    <h3 class="font-bold mb-3">Bulbasaur</h3>
-    <span class="text-tiny mb-12 block">Cód: 1</span>
+  <Card>
+    <NuxtImg :src="thumb" alt="Bulbasaur" class="mb-3 h-8" />
+    <h3 class="font-bold mb-3">{{ pokemonName }}</h3>
+    <span class="text-tiny mb-12 block">Cod: {{ cod }}</span>
     <div class="pokemon-info text-tiny-xs flex gap-1">
-      <span class=" rounded-full bg-teal-600 px-3 py-1 text-white uppercase">Grass</span>
-      <span class=" rounded-full bg-purple-800 px-3 py-1 text-white uppercase">poison</span>
+      <span
+        class="rounded-full py-1 text-white uppercase w-16 text-center"
+        v-for="pokemon in pokemonType"
+        :key="pokemon.title"
+        :style="{ backgroundColor: pokemon.color }"
+      >
+        {{ pokemon.title }}
+      </span>
     </div>
-  </div>
+  </Card>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+  pokemonName: String,
+  cod: Number || null,
+  thumb: String,
+  pokemonType: [Object],
+});
+</script>
 
 <style scoped></style>
