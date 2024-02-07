@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       families: {
         Mulish: [400, 600, 700]
       }
-  }], "@nuxt/image"],
+  }], "@nuxt/image", '@pinia/nuxt'],
   postcss: {
     plugins: {
       tailwindcss: {},

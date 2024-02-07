@@ -19,14 +19,17 @@
 </template>
 
 <script setup lang="ts">
+type PokemonTypes = {
+  title: string,
+  color: string,
+}
 
 defineProps({
   pokemonName: String,
   path: String,
   cod: Number || null,
   thumb: String,
-  pokemonType: Array,
-  colorTypes: Array
+  pokemonType: Array<PokemonTypes>
 });
 </script>
 
