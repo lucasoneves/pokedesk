@@ -11,7 +11,7 @@
         id="search-field"
         type="search"
         placeholder="Pesquise por um nome ou código"
-        class="border py-2 px-9 sm:py-3 sm:px-10 rounded-full bg-white w-full"
+        class="text-lg sm:text-sm border py-2 px-9 sm:py-3 sm:px-10 rounded-full bg-white w-full"
       />
     </form>
   </label>

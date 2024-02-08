@@ -7,6 +7,7 @@ import type { Loading } from '#build/components';
       :cod="pokemon.id"
       :pokemon-types="colorTypesPokemon"
       :thumb="pokemon.sprites.front_default"
+      :disabled="true"
     />
     <Card class="mt-7 max-h-full">
       <div v-if="pokemon.effects" class="w-full">
@@ -16,13 +17,13 @@ import type { Loading } from '#build/components';
           class="py-3 border-t last:pb-0 w-full"
           data-v-inspector="components/PokemonDetail/index.vue:13:7"
         >
-          <span class="text-xs text-[#616161]">{{ effect.effect }}</span>
+          <span class="text-sm sm:text-xs text-[#616161]">{{ effect.effect }}</span>
         </div>
         <div
           v-for="effect in pokemon.effects.flavor_text_entries"
           class="py-3 border-t last:pb-0 w-full"
         >
-          <span class="text-xs text-[#616161]">{{ effect.flavor_text }}</span>
+          <span class="text-sm sm:text-xs text-[#616161]">{{ effect.flavor_text }}</span>
         </div>
       </div>
       <span v-else>{{ pokemonFeedback }}</span>

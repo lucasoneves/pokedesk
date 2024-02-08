@@ -14,6 +14,7 @@
         :cod="pokemon.id"
         :thumb="pokemon.sprites.front_default"
         :path="pokemon.path"
+        :disabled="false"
       />
     </div>
     <Card class="mt-7" v-else><span>{{  pokemonErrorMessage }}</span></Card>
@@ -77,7 +78,7 @@ async function handleSubmitTerm(event: Event) {
       }
     } else {
       pokemons.value = [];
-      getPokemons(mainUrl.value);
+      await getPokemons(mainUrl.value);
     }
   } catch (error: any) {
     pokemonErrorMessage.value = "Error: " + error.message
@@ -125,14 +126,14 @@ async function getPokemons(url: string) {
   }
 }
 
-function handleScroll() {
+async function handleScroll() {
   let bottomOfWindow =
     document.documentElement.scrollTop + window.innerHeight ===
     document.documentElement.offsetHeight;
 
   if (bottomOfWindow) {
     limitApi.value += 24;
-    getPokemons(nextApiUrl.value);
+    await getPokemons(nextApiUrl.value);
   }
 }
 
@@ -140,7 +141,7 @@ onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 onMounted(async () => {
-  getPokemons(mainUrl.value);
+  await getPokemons(mainUrl.value);
   window.addEventListener("scroll", handleScroll);
 });
 </script>
