@@ -6,7 +6,7 @@ import type { Loading } from '#build/components';
       :pokemon-name="pokemon.name"
       :cod="pokemon.id"
       :pokemon-types="colorTypesPokemon"
-      :thumb="pokemon.sprites.front_shiny"
+      :thumb="pokemon.sprites.front_default"
     />
     <Card class="mt-7 max-h-full">
       <div v-if="pokemon.effects" class="w-full">
@@ -46,7 +46,7 @@ import { type ColorTypes } from "#imports";
 type PokemonType = {
   name: string;
   sprites: {
-    front_shiny: string;
+    front_default: string;
   };
   id: number;
   types: { type: { name: string; url: string } }[];
@@ -64,7 +64,7 @@ const loader = useLoaderStore();
 const route = useRoute();
 const pokemon = ref<PokemonType>({
   name: "",
-  sprites: { front_shiny: "" },
+  sprites: { front_default: "" },
   id: 0,
   effects: {
     effect_entries: [{ effect: "" }],
