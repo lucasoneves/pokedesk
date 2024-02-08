@@ -7,7 +7,7 @@
       <CardPokemon
         v-for="pokemon in pokemons"
         :key="pokemon.id"
-        :pokemon-type="pokemon.types"
+        :pokemon-types="pokemon.types"
         :pokemon-name="pokemon.name"
         :cod="pokemon.id"
         :thumb="pokemon.sprites.front_default"
@@ -20,6 +20,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useLoaderStore } from "#imports";
+import { typeColors } from "#imports";
+import {type ColorTypes} from '~/utils/typeColors';
 
 interface Pokemon {
   name: string;
@@ -30,32 +32,14 @@ interface Pokemon {
     front_default: string;
   };
 }
-
-type ColorTypes = {
-  title: string;
-  color: string;
-};
-
 const loader = useLoaderStore();
 const pokemons = ref<Pokemon[]>([]);
 
 const limitApi = ref(24);
-const mainUrl = ref(`https://pokeapi.co/api/v2/pokemon?limit=${limitApi.value}`);
+const mainUrl = ref(
+  `https://pokeapi.co/api/v2/pokemon?limit=${limitApi.value}`
+);
 const nextApiUrl = ref();
-
-const typeColors: Ref<ColorTypes[]> = ref<ColorTypes[]>([
-  { title: "grass", color: "#08FEC3" },
-  { title: "poison", color: "#AF08FE" },
-  { title: "water", color: "#00A3FF" },
-  { title: "electric", color: "#FFB800" },
-  { title: "ground", color: "#85826E" },
-  { title: "fairy", color: "#FBA1EC" },
-  { title: "normal", color: "#C4C4C4" },
-  { title: "flying", color: "#5317FC" },
-  { title: "default", color: "#0E0E0E" },
-  { title: "fire", color: "#FE0808" },
-]);
-
 async function getPokemons(url: string) {
   loader.setLoading();
   try {
@@ -87,6 +71,7 @@ async function getPokemons(url: string) {
           front_default: pokemon.sprites.front_default,
         },
       });
+      
     });
   } catch (error) {
     console.error("Error fetching pokemons:", error);
@@ -95,20 +80,23 @@ async function getPokemons(url: string) {
   }
 }
 
+function handleScroll() {
+  let bottomOfWindow =
+    document.documentElement.scrollTop + window.innerHeight ===
+    document.documentElement.offsetHeight;
+
+  if (bottomOfWindow) {
+    limitApi.value += 24;
+    getPokemons(nextApiUrl.value);
+  }
+}
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 onMounted(async () => {
   getPokemons(mainUrl.value);
-  window.addEventListener("scroll", () => {
-    {
-      let bottomOfWindow =
-        document.documentElement.scrollTop + window.innerHeight ===
-        document.documentElement.offsetHeight;
-
-      if (bottomOfWindow) {
-        limitApi.value += 24;
-        getPokemons(nextApiUrl.value);
-      }
-    }
-  });
+  window.addEventListener("scroll", handleScroll);
 });
 </script>
 

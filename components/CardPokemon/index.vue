@@ -7,7 +7,7 @@
       <div class="pokemon-info text-tiny-xs flex gap-1">
         <span
           class="rounded-full py-1 text-white uppercase w-16 text-center"
-          v-for="(pokemon, index) in pokemonType"
+          v-for="(pokemon, index) in pokemonTypes"
           :key="index"
           :style="{ backgroundColor: pokemon.color }"
         >
@@ -29,7 +29,7 @@ defineProps({
   path: String,
   cod: Number || null,
   thumb: String,
-  pokemonType: Array<PokemonTypes>
+  pokemonTypes: Array<PokemonTypes>
 });
 </script>
 
